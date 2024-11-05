@@ -1,6 +1,6 @@
 from flask import Flask
-
 from flask_cors import CORS
+
 from app.models import BaseGoogleSheet, GoogleSheetsHandler
 
 from .config import Config
