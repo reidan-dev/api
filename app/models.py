@@ -1,9 +1,10 @@
-from dataclasses import dataclass, field
-from typing import Protocol
-import requests
 import csv
+from dataclasses import dataclass, field
 from io import StringIO
-from time import time
+from typing import Protocol
+
+import requests
+
 
 @dataclass
 class BaseAPIProtocol(Protocol):
@@ -19,7 +20,7 @@ class BaseGoogleSheet:
 
     def get_sheet_url(self):
         return f"https://docs.google.com/spreadsheets/d/e/2PACX-1vT210RbKuZmMqdNkkUBXmDMFg8BsM4mcKloMjhuUME5LXTwFdXt7HeBk5EowEeb4X2_U9Fzei8nzjjk/pub?gid={self.sheet_id}&single=true&output=csv"
-    
+
     def get_data(self):
         response = requests.get(self.get_sheet_url())
         response.raise_for_status()
@@ -37,12 +38,12 @@ class GoogleSheetsHandler:
 
     def handler_apis(self):
         return {
-            f"/api/goole_sheets/{base_google_sheet.name}" : base_google_sheet.desc
+            f"/api/goole_sheets/{base_google_sheet.name}": base_google_sheet.desc
             for _, base_google_sheet in self.__dict__.items()
         }
 
     def handler_dict(self):
         return {
-            base_google_sheet.name : base_google_sheet
+            base_google_sheet.name: base_google_sheet
             for _, base_google_sheet in self.__dict__.items()
         }

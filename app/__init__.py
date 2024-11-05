@@ -1,5 +1,7 @@
-from app.models import BaseGoogleSheet, GoogleSheetsHandler
 from flask import Flask
+
+from app.models import BaseGoogleSheet, GoogleSheetsHandler
+
 from .config import Config
 
 
@@ -16,7 +18,7 @@ def create_app():
 
 def create_google_sheet_handlers():
     google_sheets_handler = GoogleSheetsHandler(
-        e_message=BaseGoogleSheet("eMessage","An API for the eMessage sheet.", "0"),
+        e_message=BaseGoogleSheet("eMessage", "An API for the eMessage sheet.", "0"),
     )
 
     return google_sheets_handler
