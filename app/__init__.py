@@ -12,6 +12,8 @@ def create_app():
     # CORS(app, resources={r"/api/*": {"origins": ["https://e-message.vercel.app/"]}})
     CORS(app)
 
+
+
     # Optionally, you can specify which origins are allowed
     # CORS(app, resources={r"/api/*": {"origins": "https://your-allowed-origin.com"}})
 
