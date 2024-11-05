@@ -16,9 +16,13 @@ def home():
 def get_google_sheets():
     return jsonify(google_sheets_handler.handler_apis())
 
-@main.route("/api/google_sheets/<string:sheet_name>", methods=['GET'])
-def get_google_sheet(sheet_name: str):
+@main.route("/api/google_sheets/<string:sheet_name>/", defaults={'row_id': None}, methods=['GET'])
+@main.route("/api/google_sheets/<string:sheet_name>/<string:row_id>", methods=['GET'])
+def get_google_sheet(sheet_name: str, row_id: str | None = None):
     gs_dict = google_sheets_handler.handler_dict()
     if sheet_name not in gs_dict:
         return jsonify(NOT_FOUND)
-    return gs_dict[sheet_name].get_data()
+    if row_id is None:
+        return gs_dict[sheet_name].get_data()
+    else:
+        return gs_dict[sheet_name].get_data().get(row_id, NOT_FOUND)
